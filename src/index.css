@@ -1,1 +1,40 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+button {
+    @apply cursor-pointer!;
+};
+
+@theme {
+    /* main colors */
+    --color-primary: #2563EB;
+    --color-primary-hover: #1D42ED8;
+    --color-secondary: #0F7662;
+    --color-secondary-hover: #0D5F59;
+
+    --color-background: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-surface-secondary: #F1F5F9;
+
+    --color-text: #0F172A;
+    --color-text-secondary:#475569;
+    --color-text-muted: #94A3B8;
+
+    --color-border: #E2E8F0;
+
+    /* Status colors  */
+
+    --color-success: #16A34A;
+    --color-warning: #D97706;
+    --color-error: #DC2626;
+    --color-info: #0284C7;
+
+    /* Appointment status colors */
+    --color-status-confirmed: #16A34A;
+    --color-status-pending: #D97706;
+    --color-status-cancelled: #DC2626;
+    --color-status-completed: #64748B;
+    --color-status-available: #2563EB;
+
+    /* Fonts below */
+    --font-jakarta: "Plus Jakarta Sans", sans-serif;
+}
