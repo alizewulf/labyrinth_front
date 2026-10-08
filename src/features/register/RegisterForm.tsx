@@ -1,6 +1,7 @@
 
 import Input from "@/shared/ui/Input/Input"
 import { Form, Formik } from "formik"
+import { registerUser } from "@/shared/api/auth"
 
 function RegisterForm() {
     return (
@@ -10,7 +11,7 @@ function RegisterForm() {
             email: "",
             number: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
         }}
             validate={(values) => {
                 const errors: {
@@ -19,7 +20,7 @@ function RegisterForm() {
                     email?: string,
                     number?: string,
                     password?: string,
-                    confirmPassword?: string
+                    confirmPassword?: string,
                 } = {}
 
                 if (!values.firstName.trim()) {
@@ -54,9 +55,20 @@ function RegisterForm() {
 
                 return errors
             }}
-            onSubmit={(values) => {
-                const { confirmPassword, ...userData } = values
-                console.log(userData)
+            onSubmit={async (values) => {
+                const userData = {
+                    name: values.firstName,
+                    surname: values.lastName,
+                    email: values.email,
+                    phone: values.number,
+                    password: values.password
+                }
+                try {
+                    const result = await registerUser(userData)
+                    console.log(result)
+                } catch (error) {
+                    console.error(error)
+                }
             }}
         >
             <Form className="flex flex-col gap-5.5">
