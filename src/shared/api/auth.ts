@@ -11,3 +11,17 @@ export async function registerUser(data: {
 
     return response.data
 }
+
+export async function loginUser(data: {
+    email: string
+    password: string
+}) {
+    const response = await API.post("/auth/login", data)
+
+    return response.data
+}
+
+export async function getCurrentUser() {
+    const response = await API.get("/users/me")
+    return response.data
+}
