@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Online clinic appointment booking platform",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }:Readonly<{children:React.ReactNode}>) {
   return (
     <html lang="en" className={`antialiased`}>
       <body className="min-h-full">
