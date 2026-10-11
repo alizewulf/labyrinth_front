@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/widgets/header";
 import StoreProvider from "./providers/StoreProvider";
+import AuthProvider from "./providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -17,9 +18,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full">
         <Header />
         <StoreProvider>
-          <main className="flex flex-1 flex-col px-6 py-16 sm:py-24">
-            {children}
-          </main>
+          <AuthProvider>
+            <main className="flex flex-1 flex-col px-6 py-16 sm:py-24">
+              {children}
+            </main>
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>
