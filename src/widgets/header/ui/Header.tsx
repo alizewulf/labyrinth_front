@@ -2,7 +2,6 @@ import Link from "next/link";
 import HealthIcon from "../icons/Health.Icon";
 
 const mock_routes: string[] = [
-  "Home",
   "Find A Doctor",
   "Specialities",
   "About us",
@@ -17,6 +16,7 @@ export default function Header() {
       </div>
 
       <div className="flex gap-8">
+        <a href="/" className="text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer">Home</a>
         {mock_routes.map((route) => (
           <a
             key={route}
