@@ -14,7 +14,7 @@ function FeaturedDoctors() {
 
             <div className="flex">
                 {doctorList.map(doctor => (
-                    <div className="flex flex-col">
+                    <div className="flex flex-col" key={doctor.name}>
                         <Image src={doctor.img} loading="eager" alt={doctor.name}/>
                     </div>
                 ))}
