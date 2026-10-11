@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/widgets/header";
+import StoreProvider from "./providers/StoreProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -15,9 +16,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`antialiased`}>
       <body className="min-h-full">
         <Header />
-        <main className="flex flex-1 flex-col px-6 py-16 sm:py-24">
-          {children}
-        </main>
+        <StoreProvider>
+          <main className="flex flex-1 flex-col px-6 py-16 sm:py-24">
+            {children}
+          </main>
+        </StoreProvider>
       </body>
     </html>
   );
