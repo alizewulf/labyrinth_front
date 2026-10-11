@@ -14,7 +14,7 @@ function Specialities() {
 
       <div className="flex justify-between">
         {specialities.map((speciality) => (
-          <div className="flex flex-col border p-5.5 w-51.25 h-34 border-border rounded-xl gap-3">
+          <div key={speciality.title} className="flex flex-col border p-5.5 w-51.25 h-34 border-border rounded-xl gap-3">
             <speciality.SVG />
             <p className="font-bold text-text text-sm">{speciality.title}</p>
             <span className="text-xs text-text-secondary">{speciality.doctorsAmount} Doctors</span>
