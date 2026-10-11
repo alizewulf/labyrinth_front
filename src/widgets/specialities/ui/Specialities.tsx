@@ -2,7 +2,7 @@ import { specialities } from '../data/specialities'
 
 function Specialities() {
   return (
-    <section className="w-screen font-jakarta flex flex-col gap-7">
+    <section className="font-jakarta flex flex-col gap-7">
 
       <div className="flex justify-between">
         <div className="flex flex-col gap-1.5">
