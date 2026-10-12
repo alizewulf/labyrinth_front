@@ -33,7 +33,9 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
         </span>
       </div>
 
-      <button>View Profile</button>
+      <button className="font-semibold py-2.75 text-sm text-text-secondary rounded-lg border border-border">
+        View Profile
+      </button>
     </div>
   );
 }
