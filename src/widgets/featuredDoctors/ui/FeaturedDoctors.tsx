@@ -5,7 +5,7 @@ async function FeaturedDoctors() {
   const doctors = await getDoctors();
 
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col gap-7">
       <div className="flex justify-between font-jakarta">
         <div className="flex flex-col gap-1.5">
           <h3 className="font-bold text-3xl text-text">
