@@ -10,8 +10,8 @@ export default function ArrowSVG() {
       <path
         d="M0.849976 6.1007H11.3512M6.10058 11.3513L11.3512 6.1007L6.10058 0.850098"
         stroke="white"
-        stroke-width="1.7"
-        stroke-linecap="round"
+        strokeWidth="1.7"
+        strokeLinecap="round"
       />
     </svg>
   );

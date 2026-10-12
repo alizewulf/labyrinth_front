@@ -14,7 +14,7 @@ export default function CareCallout() {
       </div>
       <Link
         href="/register"
-        className="py-3 flex justify-center items-center text-sm font-semibold gap-2"
+        className="py-3 px-4.5 flex justify-center items-center text-sm font-semibold gap-2 text-white bg-secondary rounded-lg"
       >
         <ArrowSVG /> <span>Get started today</span>
       </Link>
