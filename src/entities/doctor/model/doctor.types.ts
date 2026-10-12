@@ -5,6 +5,7 @@ export interface Doctor {
   surname: string;
   specialization: string;
   experience_type: "month" | "year";
+  experience: number;
   avatar_url: string | null;
   city: string | null;
 }

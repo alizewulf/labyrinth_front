@@ -1,5 +1,5 @@
 import { getDoctors } from "@/entities/doctor/api/getDoctors";
-import Image from "next/image";
+import DoctorCard from "./Doctor.Card";
 
 async function FeaturedDoctors() {
   const doctors = await getDoctors();
@@ -21,22 +21,9 @@ async function FeaturedDoctors() {
         </a>
       </div>
 
-      <div className="flex">
+      <div className="flex justify-between gap-5">
         {doctors.map((doctor) => (
-          <div className="flex flex-col" key={doctor.id}>
-            {doctor.avatar_url && (
-              <Image
-                src={doctor.avatar_url}
-                alt={`${doctor.name} ${doctor.surname}`}
-                width={300}
-                height={300}
-              />
-            )}
-            <h4>
-              {doctor.name} {doctor.surname}
-            </h4>
-            <span>{doctor.specialization}</span>
-          </div>
+          <DoctorCard doctor={doctor} key={doctor.id} />
         ))}
       </div>
     </section>
