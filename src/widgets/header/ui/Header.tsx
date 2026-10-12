@@ -1,22 +1,25 @@
 import Link from "next/link";
 import HealthIcon from "../icons/Health.Icon";
 
-const mock_routes: string[] = [
-  "Find A Doctor",
-  "Specialities",
-  "About us",
-];
+const mock_routes: string[] = ["Find A Doctor", "Specialities", "About us"];
 
 export default function Header() {
   return (
     <header className="flex justify-between items-center font-jakarta! py-5.25 px-16">
       <div className="flex gap-2.5 items-center">
-        <span className="bg-status-available rounded-lg p-2.5"><HealthIcon/></span>
+        <span className="bg-status-available rounded-lg p-2.5">
+          <HealthIcon />
+        </span>
         <p className="text-2xl font-extrabold text-text">Labyrinth</p>
       </div>
 
       <div className="flex gap-8">
-        <a href="/" className="text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer">Home</a>
+        <Link
+          href="/"
+          className="text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer"
+        >
+          Home
+        </Link>
         {mock_routes.map((route) => (
           <a
             key={route}
