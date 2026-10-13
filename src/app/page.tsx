@@ -1,31 +1,27 @@
-import CareCallout from "@/shared/widgets/careCallout";
-import DoctorSearch from "@/widgets/doctorSearch";
-import FeaturedDoctors from "@/widgets/featuredDoctors";
-import HowItWork from "@/widgets/howItWorks";
-import Specialties from "@/widgets/specialties/ui/Specialties";
-import { Suspense } from "react";
+import HomePage from "@/pages/HomePage";
+import { cookies } from "next/headers";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col py-12 px-16 gap-12">
-      <Suspense fallback={<p>Loading search...</p>}>
-        <DoctorSearch />
-      </Suspense>
-      <Specialties />
-      <FeaturedDoctors />
-      <HowItWork />
-      <CareCallout
-        message={{
-          header: "The next step toward feeling better",
-          subtitle:
-            "Create your free account and keep all your care in one place",
-        }}
-        link={{
-          showArrow: true,
-          textContent: "Get started today",
-          href: "/register",
-        }}
-      />
-    </div>
-  );
+export default async function Home() {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+  if (!accessToken) {
+    console.log("No access Token. rendering guest home");
+    return <HomePage />;
+  }
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      {
+        headers: {
+          Cookie: `access_token=${accessToken}`,
+        },
+        cache: "no-store",
+      },
+    );
+    const user = await response.json();
+    console.log('authed:',user);
+    return <HomePage />;
+  } catch (error){
+    console.log('failed to auth:', error)
+    return <HomePage/>
 }
