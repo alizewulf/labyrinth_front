@@ -2,13 +2,15 @@ import axios from "axios";
 import { API_URL } from "../config/api";
 
 export const API = axios.create({
-    baseURL: API_URL
-})
+  baseURL: API_URL,
+});
 
 API.interceptors.request.use((config) => {
-    const token = localStorage.getItem("accessToken")
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("accessToken");
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    return config
-})
+  }
+  return config;
+});
