@@ -1,16 +1,12 @@
 import Link from "next/link";
-import HealthIcon from "../icons/Health.Icon";
+import HealthIcon from "../../../shared/widgets/logo/icons/Health.Icon";
 import HeaderNavigation from "./Header.Navigation";
+import BrandLogo from "@/shared/widgets/logo/ui/BrandLogo";
 
 export default function Header() {
   return (
     <header className="flex justify-between items-center font-jakarta! py-5.25 px-16">
-      <div className="flex gap-2.5 items-center">
-        <span className="bg-status-available rounded-lg p-2.5">
-          <HealthIcon />
-        </span>
-        <p className="text-2xl font-extrabold text-text">Labyrinth</p>
-      </div>
+      <BrandLogo />
 
       <HeaderNavigation />
 
