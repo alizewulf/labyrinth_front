@@ -4,8 +4,6 @@ import { usePathname } from "next/navigation";
 import { ROUTES } from "../config/nav.config";
 
 export default function HeaderNavigation() {
-  const mock_routes: string[] = ["Specialities", "About us"];
-
   const pathName = usePathname();
   const routeClass: string =
     "text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer";
@@ -21,11 +19,6 @@ export default function HeaderNavigation() {
         >
           {route.label}
         </Link>
-      ))}
-      {mock_routes.map((route) => (
-        <a key={route} className={`${routeClass}`}>
-          {route}
-        </a>
       ))}
     </nav>
   );

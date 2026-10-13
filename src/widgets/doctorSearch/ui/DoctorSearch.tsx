@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/shared/ui/Button";
 import { Field, Form, Formik } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -64,12 +65,9 @@ export default function DoctorSearch() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="rounded-lg bg-[#2563EB] px-6 py-3 text-sm font-semibold text-white"
-            >
+            <Button variant="primary" type="submit">
               Search
-            </button>
+            </Button>
           </Form>
         )}
       </Formik>
