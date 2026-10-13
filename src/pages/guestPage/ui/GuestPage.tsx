@@ -5,7 +5,7 @@ import HowItWork from "@/widgets/howItWorks";
 import Specialties from "@/widgets/specialties/ui/Specialties";
 import { Suspense } from "react";
 
-export default function HomePage() {
+export default function GuestPage() {
   return (
     <div className="flex flex-col py-12 px-16 gap-12">
       <Suspense fallback={<p>Loading search...</p>}>

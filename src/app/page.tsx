@@ -1,13 +1,17 @@
-import HomePage from "@/pages/HomePage";
+import HomePage from "@/pages/guestPage";
+import PatientPage from "@/pages/patientPage";
 import { cookies } from "next/headers";
 
 export default async function Home() {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value;
+
   if (!accessToken) {
-    console.log("No access Token. rendering guest home");
     return <HomePage />;
   }
+
+  let isAuthenticated = false;
+
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
@@ -18,10 +22,15 @@ export default async function Home() {
         cache: "no-store",
       },
     );
-    const user = await response.json();
-    console.log('authed:',user);
-    return <HomePage />;
-  } catch (error){
-    console.log('failed to auth:', error)
-    return <HomePage/>
+
+    isAuthenticated = response.ok;
+  } catch (error) {
+    console.error("Failed to verify session:", error);
+  }
+
+  if (isAuthenticated) {
+    return <PatientPage />;
+  }
+
+  return <HomePage />;
 }
