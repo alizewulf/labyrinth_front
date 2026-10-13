@@ -1,3 +1,4 @@
+import CareCallout from "@/widgets/careCallout";
 import FeaturedDoctors from "@/widgets/featuredDoctors";
 import HowItWork from "@/widgets/howItWorks";
 import Specialities from "@/widgets/specialities/ui/Specialities";
@@ -8,6 +9,7 @@ export default function Home() {
       <Specialities />
       <FeaturedDoctors />
       <HowItWork />
+      <CareCallout />
     </div>
   );
 }
