@@ -20,7 +20,11 @@ export default function Home() {
           subtitle:
             "Create your free account and keep all your care in one place",
         }}
-        link={{ showArrow: true, textContent: "Get started today" }}
+        link={{
+          showArrow: true,
+          textContent: "Get started today",
+          href: "/register",
+        }}
       />
     </div>
   );

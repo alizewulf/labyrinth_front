@@ -8,6 +8,7 @@ interface CareCalloutProps extends FormIntroductionProps {
   link: {
     showArrow: boolean;
     textContent: string;
+    href: string;
   };
 }
 
@@ -21,7 +22,7 @@ export default function CareCallout({ link, message }: CareCalloutProps) {
         }}
       />
       <Link
-        href="/register"
+        href={link.href}
         className="py-3 px-4.5 flex justify-center items-center text-sm font-semibold gap-2 text-white bg-secondary rounded-lg"
       >
         {link.showArrow && <ArrowSVG />}
