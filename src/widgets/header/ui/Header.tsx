@@ -1,7 +1,6 @@
 import Link from "next/link";
 import HealthIcon from "../icons/Health.Icon";
-
-const mock_routes: string[] = ["Find A Doctor", "Specialities", "About us"];
+import HeaderNavigation from "./Header.Navigation";
 
 export default function Header() {
   return (
@@ -13,22 +12,7 @@ export default function Header() {
         <p className="text-2xl font-extrabold text-text">Labyrinth</p>
       </div>
 
-      <div className="flex gap-8">
-        <Link
-          href="/"
-          className="text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer"
-        >
-          Home
-        </Link>
-        {mock_routes.map((route) => (
-          <a
-            key={route}
-            className="text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer"
-          >
-            {route}
-          </a>
-        ))}
-      </div>
+      <HeaderNavigation />
 
       <div className="flex gap-3 items-center">
         <Link
