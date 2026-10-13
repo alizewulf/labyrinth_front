@@ -3,14 +3,5 @@ import { API_URL } from "../config/api";
 
 export const API = axios.create({
   baseURL: API_URL,
-});
-
-API.interceptors.request.use((config) => {
-  if (typeof window !== "undefined") {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-  }
-  return config;
+  withCredentials: true,
 });

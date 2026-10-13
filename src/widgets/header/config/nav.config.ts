@@ -3,7 +3,7 @@ interface NavigationConfig {
   label: string;
 }
 
-export const ROUTES: NavigationConfig[] = [
+export const PUBLIC_ROUTES: NavigationConfig[] = [
   {
     route: "/",
     label: "Home",
@@ -16,4 +16,8 @@ export const ROUTES: NavigationConfig[] = [
     route: "/specialties",
     label: "Specialities",
   },
+];
+
+export const PATIENT_ROUTES: NavigationConfig[] = [
+  { route: "/", label: "Dashboard" },
 ];

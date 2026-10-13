@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ROUTES } from "../config/nav.config";
+import { PUBLIC_ROUTES } from "../config/nav.config";
 
 export default function HeaderNavigation() {
   const pathName = usePathname();
@@ -15,7 +15,7 @@ export default function HeaderNavigation() {
         ""
       ) : (
         <nav className="flex gap-8">
-          {ROUTES.map((route) => (
+          {PUBLIC_ROUTES.map((route) => (
             <Link
               key={route.label}
               href={`${route.route}`}
