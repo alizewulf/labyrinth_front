@@ -14,7 +14,7 @@ function AuthForm({ type }: { type: AuthFormProps }) {
         {type === "login" ? (
           <div className="flex flex-col gap-5.5 min-w-125">
             <FormIntroduction
-              text={{
+              message={{
                 header: "Welcome back",
                 subtitle: "Log in to keep your care moving forward",
               }}
@@ -24,7 +24,7 @@ function AuthForm({ type }: { type: AuthFormProps }) {
         ) : (
           <div>
             <FormIntroduction
-              text={{
+              message={{
                 header: "Create your account",
                 subtitle: "Your health deserves a simpler path.",
               }}

@@ -1,4 +1,4 @@
-import CareCallout from "@/widgets/careCallout";
+import CareCallout from "@/shared/widgets/careCallout";
 import DoctorSearch from "@/widgets/doctorSearch";
 import FeaturedDoctors from "@/widgets/featuredDoctors";
 import HowItWork from "@/widgets/howItWorks";
@@ -14,7 +14,14 @@ export default function Home() {
       <Specialties />
       <FeaturedDoctors />
       <HowItWork />
-      <CareCallout />
+      <CareCallout
+        message={{
+          header: "The next step toward feeling better",
+          subtitle:
+            "Create your free account and keep all your care in one place",
+        }}
+        link={{ showArrow: true, textContent: "Get started today" }}
+      />
     </div>
   );
 }

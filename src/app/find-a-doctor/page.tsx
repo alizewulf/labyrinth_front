@@ -8,7 +8,7 @@ export default function FindADoctorPage() {
   return (
     <div className="flex flex-col px-16 py-10 gap-7">
       <FormIntroduction
-        text={{
+        message={{
           header: "Find the right doctor for you",
           subtitle:
             "Expert care, on your terms. Browse trusted providers near you.",

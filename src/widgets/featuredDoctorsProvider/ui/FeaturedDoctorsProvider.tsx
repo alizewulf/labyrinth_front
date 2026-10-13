@@ -7,7 +7,7 @@ export default async function FeaturedDoctorsProvider() {
   return (
     <section className="flex flex-col gap-7">
       <FormIntroduction
-        text={{
+        message={{
           header: "Meet the people behind your care",
           subtitle:
             "Highly rated specialists, selected for their expertise and compassion",
@@ -31,7 +31,9 @@ export default async function FeaturedDoctorsProvider() {
             <p className="font-bold text-lg text-text">
               Dr {doctor.name} {doctor.surname}
             </p>
-            <span className="text-sm text-text-secondary">{doctor.specialization}</span>
+            <span className="text-sm text-text-secondary">
+              {doctor.specialization}
+            </span>
             <button className="rounded-lg border border-border font-semibold text-xs text-text-secondary py-3.5">
               View Profile
             </button>

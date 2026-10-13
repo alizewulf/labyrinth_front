@@ -16,7 +16,7 @@ export default async function SpecialtiesPage() {
   return (
     <div className="flex flex-col px-16 py-12 gap-7">
       <FormIntroduction
-        text={{
+        message={{
           header: "Explore our specialties",
           subtitle: `${specialtiesAmount} specialties · ${doctorsAmount} active doctors across our clinic network`,
         }}
