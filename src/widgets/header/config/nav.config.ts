@@ -13,7 +13,7 @@ export const ROUTES: NavigationConfig[] = [
     label: "Find A Doctor",
   },
   {
-    route: "/specialities",
+    route: "/specialties",
     label: "Specialities",
   },
 ];
