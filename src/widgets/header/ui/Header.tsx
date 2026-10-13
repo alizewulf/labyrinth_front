@@ -1,5 +1,4 @@
 import Link from "next/link";
-import HealthIcon from "../../../shared/widgets/logo/icons/Health.Icon";
 import HeaderNavigation from "./Header.Navigation";
 import BrandLogo from "@/shared/widgets/logo/ui/BrandLogo";
 
