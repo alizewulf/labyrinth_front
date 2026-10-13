@@ -1,4 +1,5 @@
 import CareCallout from "@/widgets/careCallout";
+import DoctorSearch from "@/widgets/doctorSearch";
 import FeaturedDoctors from "@/widgets/featuredDoctors";
 import HowItWork from "@/widgets/howItWorks";
 import Specialities from "@/widgets/specialities/ui/Specialities";
