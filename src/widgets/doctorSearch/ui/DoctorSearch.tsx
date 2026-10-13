@@ -1,24 +1,34 @@
 "use client";
 
-import { Formik, Form } from "formik";
-import { useFindDoctor } from "@/features/findDoctor";
+import { Field, Form, Formik } from "formik";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function DoctorSearch() {
-  const { search, setSearch } = useFindDoctor();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   return (
     <section className="w-full">
       <Formik
         initialValues={{
-          search,
+          search: searchParams.get("search") ?? "",
           location: "",
         }}
         enableReinitialize
         onSubmit={(values) => {
-          setSearch(values.search.trim());
+          const search = values.search.trim();
+          const params = new URLSearchParams();
+
+          if (search) {
+            params.set("search", search);
+          }
+
+          const query = params.toString();
+
+          router.push(query ? `/find-a-doctor?${query}` : "/find-a-doctor");
         }}
       >
-        {({ values, handleChange }) => (
+        {() => (
           <Form className="flex items-end gap-4 rounded-xl border border-border p-5 font-jakarta">
             <div className="flex flex-1 flex-col gap-2">
               <label
@@ -27,12 +37,11 @@ export default function DoctorSearch() {
               >
                 Doctor or specialty
               </label>
-              <input
+
+              <Field
                 id="search"
                 name="search"
                 type="text"
-                value={values.search}
-                onChange={handleChange}
                 placeholder="Search by doctor name or specialty"
                 className="w-full rounded-lg border border-border px-4 py-3 text-sm outline-none focus:border-[#2563EB]"
               />
@@ -45,12 +54,11 @@ export default function DoctorSearch() {
               >
                 Location
               </label>
-              <input
+
+              <Field
                 id="location"
                 name="location"
                 type="text"
-                value={values.location}
-                onChange={handleChange}
                 placeholder="San Francisco Bay Area"
                 className="w-full rounded-lg border border-border px-4 py-3 text-sm outline-none focus:border-[#2563EB]"
               />
