@@ -16,11 +16,14 @@ export default function FindADoctorPage() {
   const [appliedFilters, setAppliedFilters] = useState<DoctorFilters | null>(
     null,
   );
-
+  const [search, setSearch] = useState("");
   useEffect(() => {
     async function fetchDoctors() {
+      setIsLoading(true);
+      setError("");
+
       try {
-        const data = await getDoctors();
+        const data = await getDoctors(search);
         setDoctors(data);
       } catch {
         setError("Failed to load doctors. Please try again.");
@@ -30,7 +33,7 @@ export default function FindADoctorPage() {
     }
 
     fetchDoctors();
-  }, []);
+  }, [search]);
 
   const filteredDoctors = useMemo(() => {
     if (!appliedFilters) return doctors;
@@ -69,7 +72,7 @@ export default function FindADoctorPage() {
         }}
       />
 
-      <DoctorSearch />
+      <DoctorSearch onSearch={setSearch} />
 
       <div className="flex items-start gap-6">
         <FilterSidebar onApply={setAppliedFilters} />
