@@ -12,16 +12,16 @@ export const metadata: Metadata = {
   description: "Online clinic appointment booking platform",
 };
 
-export default function RootLayout({ children }:Readonly<{children:React.ReactNode}>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`antialiased`}>
       <body className="min-h-full">
         <Header />
         <StoreProvider>
           <AuthProvider>
-            <main className="flex flex-1 flex-col px-6 py-16 sm:py-24">
-              {children}
-            </main>
+            <main className="flex flex-1 flex-col">{children}</main>
           </AuthProvider>
         </StoreProvider>
       </body>
