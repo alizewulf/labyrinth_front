@@ -2,6 +2,7 @@ import FormIntroduction from "@/shared/ui/FormIntroduction/FormIntroduction";
 import SpecialtiesCatalog from "@/widgets/specialtiesCatalog";
 import { getSpecialties } from "@/entities/specialities/api/getSpecialities";
 import FeaturedDoctorsProvider from "@/widgets/featuredDoctorsProvider";
+import Notice from "@/shared/widgets/notice";
 
 export default async function SpecialtiesPage() {
   const specialties = await getSpecialties();
@@ -23,6 +24,14 @@ export default async function SpecialtiesPage() {
 
       <SpecialtiesCatalog />
       <FeaturedDoctorsProvider />
+      <Notice
+        notification="information"
+        message={{
+          title: "Not sure where to start?",
+          description:
+            "Our general care doctors can help you understand your concerns and connect you with the right specialist. For guidance, call +(995) 555-123-456.",
+        }}
+      />
     </div>
   );
 }
