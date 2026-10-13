@@ -12,4 +12,8 @@ export const ROUTES: NavigationConfig[] = [
     route: "/find-a-doctor",
     label: "Find A Doctor",
   },
+  {
+    route: "/specialities",
+    label: "Specialities",
+  },
 ];

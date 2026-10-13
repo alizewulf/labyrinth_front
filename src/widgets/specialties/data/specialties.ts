@@ -5,7 +5,7 @@ import {
   HeartPulseSVG,
   ScanFaceSVG,
   StethoscopeSVG,
-} from "../ui/Specialities.Icon";
+} from "../ui/Specialties.Icon";
 
 export const specialityIcons: Record<string, React.ElementType> = {
   Cardiology: HeartPulseSVG,
