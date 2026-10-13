@@ -1,21 +1,21 @@
 "use client";
 
-import { Form, Formik } from "formik";
+import { Formik, Form } from "formik";
+import { useFindDoctor } from "@/features/findDoctor";
 
-interface DoctorSearchProps {
-  onSearch: (search: string) => void;
-}
+export default function DoctorSearch() {
+  const { search, setSearch } = useFindDoctor();
 
-export default function DoctorSearch({ onSearch }: DoctorSearchProps) {
   return (
     <section className="w-full">
       <Formik
         initialValues={{
-          search: "",
+          search,
           location: "",
         }}
+        enableReinitialize
         onSubmit={(values) => {
-          onSearch(values.search.trim());
+          setSearch(values.search.trim());
         }}
       >
         {({ values, handleChange }) => (
