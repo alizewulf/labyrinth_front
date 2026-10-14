@@ -1,8 +1,8 @@
-import { getSpecialities } from "@/entities/specialities/api/getSpecialities";
-import { specialityIcons } from "../data/specialities";
+import { getSpecialties } from "@/entities/specialities/api/getSpecialities";
+import { specialityIcons } from "../data/specialties";
 
-async function Specialities() {
-  const specialities = await getSpecialities();
+async function Specialties() {
+  const specialties = await getSpecialties();
 
   return (
     <section className="font-jakarta flex flex-col gap-7">
@@ -22,7 +22,7 @@ async function Specialities() {
       </div>
 
       <div className="flex justify-between">
-        {specialities.map((speciality) => {
+        {specialties.map((speciality) => {
           const SVG = specialityIcons[speciality.title];
 
           return (
@@ -45,4 +45,4 @@ async function Specialities() {
   );
 }
 
-export default Specialities;
+export default Specialties;

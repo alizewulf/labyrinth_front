@@ -3,7 +3,7 @@
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 
-import { getSpecialities } from "@/entities/specialities/api/getSpecialities";
+import { getSpecialties } from "@/entities/specialities/api/getSpecialities";
 import type { Speciality } from "@/entities/specialities/model/speciality.types";
 import { useFindDoctor } from "@/features/findDoctor";
 import {
@@ -21,7 +21,7 @@ export default function FilterSidebar() {
 
     async function fetchSpecialities() {
       try {
-        const data = await getSpecialities();
+        const data = await getSpecialties();
 
         if (!cancelled) {
           setSpecialities(data);
