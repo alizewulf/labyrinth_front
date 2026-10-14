@@ -1,20 +1,36 @@
-import CareCallout from "@/widgets/careCallout";
-import DoctorSearch from "@/widgets/doctorSearch";
-import FeaturedDoctors from "@/widgets/featuredDoctors";
-import HowItWork from "@/widgets/howItWorks";
-import Specialties from "@/widgets/specialties/ui/Specialties";
-import { Suspense } from "react";
+import HomePage from "@/pages/guestPage";
+import PatientPage from "@/pages/patientPage";
+import { cookies } from "next/headers";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col py-12 px-16 gap-12">
-      <Suspense fallback={<p>Loading search...</p>}>
-        <DoctorSearch />
-      </Suspense>
-      <Specialties />
-      <FeaturedDoctors />
-      <HowItWork />
-      <CareCallout />
-    </div>
-  );
+export default async function Home() {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+
+  if (!accessToken) {
+    return <HomePage />;
+  }
+
+  let isAuthenticated = false;
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      {
+        headers: {
+          Cookie: `access_token=${accessToken}`,
+        },
+        cache: "no-store",
+      },
+    );
+
+    isAuthenticated = response.ok;
+  } catch (error) {
+    console.error("Failed to verify session:", error);
+  }
+
+  if (isAuthenticated) {
+    return <PatientPage />;
+  }
+
+  return <HomePage />;
 }

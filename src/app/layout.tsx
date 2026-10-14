@@ -18,9 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`antialiased`}>
       <body className="min-h-full">
-        <Header />
         <StoreProvider>
           <AuthProvider>
+            <Header />
             <main className="flex flex-1 flex-col">{children}</main>
           </AuthProvider>
         </StoreProvider>
