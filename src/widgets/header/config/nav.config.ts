@@ -20,4 +20,5 @@ export const PUBLIC_ROUTES: NavigationConfig[] = [
 
 export const PATIENT_ROUTES: NavigationConfig[] = [
   { route: "/", label: "Dashboard" },
+  { route: "/book-appointment", label: "Book appointment" },
 ];

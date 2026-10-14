@@ -1,0 +1,87 @@
+"use client";
+
+import { useCallback, useState } from "react";
+import type { Doctor } from "@/entities/doctor/model/doctor.types";
+import type { AvailableSlot } from "@/entities/doctorSchedule/api/getAvailableSlots";
+import ChooseDate from "./ui/ChooseDate";
+import ChooseDoctor from "./ui/ChooseDoctor";
+import StepProgress from "./ui/ProgressBar";
+import ChooseTime from "./ui/ChooseTime";
+import BookingReview from "./ui/BookingReview";
+import BookingConfirmation from "./ui/BookingConfirmation";
+
+export default function BookingFlow() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [availableSlots, setAvailableSlots] = useState<AvailableSlot[]>([]);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const handleSelectDoctor = useCallback((doctor: Doctor) => {
+    setSelectedDoctor(doctor);
+    setSelectedDate(null);
+    setAvailableSlots([]);
+    setSelectedTime(null);
+  }, []);
+
+  const handleAvailableSlotsChange = useCallback((slots: AvailableSlot[]) => {
+    setAvailableSlots(slots);
+  }, []);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <StepProgress currentStep={currentStep} />
+      {currentStep === 1 && (
+        <ChooseDoctor
+          selectedDoctor={selectedDoctor}
+          onSelectDoctor={handleSelectDoctor}
+          onContinue={() => setCurrentStep(2)}
+          onCancel={() => setCurrentStep(1)}
+        />
+      )}
+      {currentStep === 2 && selectedDoctor && (
+        <ChooseDate
+          doctor={selectedDoctor}
+          selectedDate={selectedDate}
+          availableSlots={availableSlots}
+          onSelectDate={(date) => {
+            setSelectedDate(date);
+            setSelectedTime(null);
+          }}
+          onAvailableSlotsChange={handleAvailableSlotsChange}
+          onBack={() => setCurrentStep(1)}
+          onContinue={() => setCurrentStep(3)}
+        />
+      )}
+      {currentStep === 3 && selectedDoctor && selectedDate && (
+        <ChooseTime
+          doctor={selectedDoctor}
+          selectedDate={selectedDate}
+          availableSlots={availableSlots}
+          selectedTime={selectedTime}
+          onSelectTime={setSelectedTime}
+          onBack={() => setCurrentStep(2)}
+          onContinue={() => setCurrentStep(4)}
+        />
+      )}
+      {currentStep === 4 && selectedDoctor && selectedDate && selectedTime && (
+        <BookingReview
+          doctor={selectedDoctor}
+          date={selectedDate}
+          time={selectedTime}
+          onBack={() => setCurrentStep(3)}
+          onConfirm={() => {
+            setCurrentStep(5);
+          }}
+        />
+      )}
+
+      {currentStep === 5 && selectedDoctor && selectedDate && selectedTime && (
+        <BookingConfirmation
+          doctor={selectedDoctor}
+          date={selectedDate}
+          time={selectedTime}
+        />
+      )}
+    </div>
+  );
+}
