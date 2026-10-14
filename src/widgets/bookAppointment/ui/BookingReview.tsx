@@ -8,6 +8,8 @@ interface BookingReviewProps {
   time: string;
   onBack: () => void;
   onConfirm: () => void;
+  isSubmitting: boolean;
+  error: string | null;
 }
 
 export default function BookingReview({
@@ -16,6 +18,8 @@ export default function BookingReview({
   time,
   onBack,
   onConfirm,
+  isSubmitting,
+  error,
 }: BookingReviewProps) {
   const formattedDate = new Date(`${date}T12:00:00`).toLocaleDateString(
     "en-US",
@@ -68,10 +72,16 @@ export default function BookingReview({
         <button
           type="button"
           onClick={onConfirm}
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white"
+          disabled={isSubmitting}
+          className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Confirm appointment
+          {isSubmitting ? "Booking..." : "Confirm appointment"}
         </button>
+        {error && (
+          <p role="alert" className="text-sm text-red-600">
+            {error}
+          </p>
+        )}
       </div>
     </section>
   );

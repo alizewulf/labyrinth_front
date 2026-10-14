@@ -21,7 +21,8 @@ export default function PatientPage({
       (a, b) =>
         new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime(),
     )[0];
-
+  console.log(appointments.map(({ id, status }) => ({ id, status })));
+  console.log("Pending metric:", metrics.pending);
   const nextVisit = nextAppointment
     ? new Date(nextAppointment.starts_at).toLocaleDateString("en-GB", {
         day: "numeric",
@@ -46,7 +47,9 @@ export default function PatientPage({
         <PatientMetric
           appointment={{
             nextVisit: "",
-            visitCounts: metrics.pending,
+            visitCounts: appointments.filter(
+              (appointment) => appointment.status === "pending",
+            ).length,
           }}
           type="pending"
         />

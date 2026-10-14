@@ -9,6 +9,8 @@ import StepProgress from "./ui/ProgressBar";
 import ChooseTime from "./ui/ChooseTime";
 import BookingReview from "./ui/BookingReview";
 import BookingConfirmation from "./ui/BookingConfirmation";
+import { useRouter } from "next/navigation";
+import { createAppointment } from "@/entities/appointment/api/createAppointments";
 
 export default function BookingFlow() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -26,7 +28,37 @@ export default function BookingFlow() {
   const handleAvailableSlotsChange = useCallback((slots: AvailableSlot[]) => {
     setAvailableSlots(slots);
   }, []);
+  const router = useRouter();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleConfirmAppointment = async () => {
+    if (!selectedDoctor || !selectedDate || !selectedTime || isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      await createAppointment({
+        doctorId: selectedDoctor.id,
+        startsAt: `${selectedDate}T${selectedTime}:00+04:00`,
+      });
+
+      setCurrentStep(5);
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to create appointment:", error);
+
+      setSubmitError(
+        error instanceof Error ? error.message : "Failed to create appointment",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="flex flex-col gap-6">
       <StepProgress currentStep={currentStep} />
@@ -69,9 +101,9 @@ export default function BookingFlow() {
           date={selectedDate}
           time={selectedTime}
           onBack={() => setCurrentStep(3)}
-          onConfirm={() => {
-            setCurrentStep(5);
-          }}
+          onConfirm={handleConfirmAppointment}
+          isSubmitting={isSubmitting}
+          error={submitError}
         />
       )}
 
