@@ -1,15 +1,28 @@
 import FormIntroduction from "@/shared/ui/FormIntroduction/FormIntroduction";
+import SpecialtiesCatalog from "@/widgets/specialtiesCatalog";
+import { getSpecialties } from "@/entities/specialities/api/getSpecialities";
+import FeaturedDoctorsProvider from "@/widgets/featuredDoctorsProvider";
 
-export default function SpecialtiesPage() {
+export default async function SpecialtiesPage() {
+  const specialties = await getSpecialties();
+
+  const specialtiesAmount = specialties.length;
+  const doctorsAmount = specialties.reduce(
+    (total, speciality) => total + speciality.doctorsAmount,
+    0,
+  );
+
   return (
     <div className="flex flex-col px-16 py-12 gap-7">
       <FormIntroduction
         text={{
           header: "Explore our specialties",
-          subtitle:
-            "12 specialties · 204 active doctors across our clinic network",
+          subtitle: `${specialtiesAmount} specialties · ${doctorsAmount} active doctors across our clinic network`,
         }}
       />
+
+      <SpecialtiesCatalog />
+      <FeaturedDoctorsProvider />
     </div>
   );
 }
