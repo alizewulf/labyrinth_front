@@ -7,7 +7,7 @@ export default function HowItWork() {
       <h3 className="font-bold text-3xl text-text text-center">
         Your path to care, made simple
       </h3>
-      <div className="flex gap-12">
+      <div className="flex justify-between">
         {processStep_Data.map((object) => (
           <ProcessStep object={object} key={object.step} />
         ))}
