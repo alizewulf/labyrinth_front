@@ -7,14 +7,14 @@ interface DoctorCardProps {
 
 export default function DoctorCard({ doctor }: DoctorCardProps) {
   return (
-    <div className="flex font-jakarta flex-col border border-border rounded-xl gap-4 p-5">
+    <div className="flex font-jakarta flex-col border border-border rounded-xl gap-4 p-5 w-full">
       {doctor.avatar_url && (
         <Image
           loading="eager"
           src={doctor.avatar_url}
-          width={250}
-          height={155}
-          className="rounded-xl"
+          width={400}
+          height={250}
+          className="rounded-xl w-full h-48 object-cover"
           alt={`${doctor.name} ${doctor.surname}`}
         />
       )}

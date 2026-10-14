@@ -4,7 +4,7 @@ import BrandLogo from "@/shared/widgets/logo/ui/BrandLogo";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center font-jakarta! py-5.25 px-16">
+    <header className="flex justify-between items-center font-jakarta! py-4 px-4 sm:px-8 md:py-5.25 md:px-16 max-w-7xl mx-auto w-full">
       <BrandLogo />
 
       <HeaderNavigation />

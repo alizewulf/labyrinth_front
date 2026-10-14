@@ -25,10 +25,10 @@ export default function Hero({ showSearch = true }: HeroProps) {
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3.5 mt-7">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3.5 mt-7">
             <Link
               href="/find-a-doctor"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary hover:bg-[#1d4ed8] px-5 py-3 text-sm font-semibold text-white transition-colors shadow-xs"
+              className="inline-flex justify-center items-center gap-2 rounded-lg bg-primary hover:bg-[#1d4ed8] px-5 py-3 text-sm font-semibold text-white transition-colors shadow-xs"
             >
               <ArrowRightSVG className="w-4 h-4 text-white" />
               <span>Find your doctor</span>
@@ -36,14 +36,14 @@ export default function Hero({ showSearch = true }: HeroProps) {
 
             <Link
               href="/specialties"
-              className="inline-flex items-center rounded-lg border border-border bg-white hover:bg-slate-50 px-5 py-3 text-sm font-semibold text-text transition-colors shadow-xs"
+              className="inline-flex justify-center items-center rounded-lg border border-border bg-white hover:bg-slate-50 px-5 py-3 text-sm font-semibold text-text transition-colors shadow-xs"
             >
               Explore specialties
             </Link>
           </div>
 
           {/* Metrics */}
-          <div className="flex items-center gap-8 sm:gap-12 mt-9 pt-4">
+          <div className="flex flex-wrap items-center gap-6 sm:gap-12 mt-8 pt-2">
             <div>
               <p className="text-2xl sm:text-3xl font-bold text-text">200+</p>
               <p className="text-xs sm:text-sm text-text-secondary mt-1">Verified doctors</p>

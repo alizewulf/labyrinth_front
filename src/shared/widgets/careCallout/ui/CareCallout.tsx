@@ -14,7 +14,7 @@ interface CareCalloutProps extends FormIntroductionProps {
 
 export default function CareCallout({ link, message }: CareCalloutProps) {
   return (
-    <section className="flex justify-between items-center font-jakarta py-12 px-16">
+    <section className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 font-jakarta py-8 px-6 md:py-12 md:px-12 rounded-2xl bg-slate-50 border border-border">
       <FormIntroduction
         message={{
           header: message.header,
@@ -23,7 +23,7 @@ export default function CareCallout({ link, message }: CareCalloutProps) {
       />
       <Link
         href={link.href}
-        className="py-3 px-4.5 flex justify-center items-center text-sm font-semibold gap-2 text-white bg-secondary rounded-lg"
+        className="py-3 px-5 flex justify-center items-center text-sm font-semibold gap-2 text-white bg-secondary hover:bg-secondary/90 transition-colors rounded-lg shrink-0 w-full sm:w-auto"
       >
         {link.showArrow && <ArrowSVG />}
         <span>{link.textContent}</span>
