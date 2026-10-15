@@ -6,3 +6,4 @@ export type {
 
 export { getAppointments } from "./api/getAppointments";
 export { getAppointmentMetrics } from "./api/getAppointmentMetrics";
+export { getDoctorAppointmentMetrics } from "./api/getDoctorAppointmentMetrics";
