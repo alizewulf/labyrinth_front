@@ -1,16 +1,13 @@
 import CareCallout from "@/shared/widgets/careCallout";
-import DoctorSearch from "@/widgets/doctorSearch";
+import Hero from "@/widgets/hero";
 import FeaturedDoctors from "@/widgets/featuredDoctors";
 import HowItWork from "@/widgets/howItWorks";
 import Specialties from "@/widgets/specialties/ui/Specialties";
-import { Suspense } from "react";
 
 export default function GuestPage() {
   return (
-    <div className="flex flex-col py-12 px-16 gap-12">
-      <Suspense fallback={<p>Loading search...</p>}>
-        <DoctorSearch />
-      </Suspense>
+    <div className="flex flex-col py-6 px-4 sm:px-8 md:py-12 md:px-16 gap-8 md:gap-12 w-full">
+      <Hero />
       <Specialties />
       <FeaturedDoctors />
       <HowItWork />

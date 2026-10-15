@@ -15,7 +15,7 @@ export default function HeaderNavigation() {
       {pathName === "/login" || pathName === "/register" ? (
         ""
       ) : (
-        <nav className="flex gap-8">
+        <nav className="hidden md:flex gap-6 lg:gap-8">
           {routes.map((route) => (
             <Link
               key={route.label}
