@@ -1,5 +1,5 @@
 import CareCallout from "@/shared/widgets/careCallout";
-import Hero from "@/shared/widgets/hero";
+import Hero from "@/widgets/hero";
 import FeaturedDoctors from "@/widgets/featuredDoctors";
 import HowItWork from "@/widgets/howItWorks";
 import Specialties from "@/widgets/specialties/ui/Specialties";

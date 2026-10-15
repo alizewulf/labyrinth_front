@@ -1,1 +1,1 @@
-export { default } from "@/shared/widgets/hero";
+export { default } from "./ui/Hero";
