@@ -23,3 +23,18 @@ export interface AdminDoctor {
   created_at: string;
   profile_completed: boolean;
 }
+
+export interface MyDoctorProfile {
+  id: number;
+  user_id: number;
+  name: string | null;
+  surname: string | null;
+  city: string | null;
+  specialization: string | null;
+  experience_type: "month" | "year" | null;
+  experience: number | null;
+  avatar_url: string | null;
+  avatar_public_id: string | null;
+  created_at: string;
+  updated_at: string;
+}

@@ -138,7 +138,9 @@ export default function ChooseDoctor({
           !error &&
           filteredDoctors.map((doctor) => {
             const isSelected = selectedDoctor?.id === doctor.id;
-
+            if (doctor === null) {
+              return
+            }
             return (
               <button
                 key={doctor.id}
@@ -159,8 +161,8 @@ export default function ChooseDoctor({
                   />
                 ) : (
                   <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[#F1F5F9] font-bold text-[#64748B]">
-                    {doctor.name.charAt(0)}
-                    {doctor.surname.charAt(0)}
+                    {doctor.name?.charAt(0)}
+                    {doctor.surname?.charAt(0)}
                   </div>
                 )}
 
