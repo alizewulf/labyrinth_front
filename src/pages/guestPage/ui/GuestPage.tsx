@@ -6,7 +6,7 @@ import Specialties from "@/widgets/specialties/ui/Specialties";
 
 export default function GuestPage() {
   return (
-    <div className="flex flex-col py-6 px-4 sm:px-8 md:py-12 md:px-16 gap-8 md:gap-12 max-w-7xl mx-auto w-full">
+    <div className="flex flex-col py-6 px-4 sm:px-8 md:py-12 md:px-16 gap-8 md:gap-12 w-full">
       <Hero />
       <Specialties />
       <FeaturedDoctors />
