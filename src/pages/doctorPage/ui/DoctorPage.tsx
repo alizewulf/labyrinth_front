@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import type { Appointment, AppointmentMetrics } from "@/entities/appointment";
 import type { User } from "@/entities/user/user.types";
+import DoctorAppointments from "./DoctorAppointments";
+import DoctorScheduleForm from "@/features/doctorSettings/ui/DoctorScheduleForm";
 
 interface DoctorPageProps {
   user: User;
@@ -10,8 +15,32 @@ interface DoctorPageProps {
 export default function DoctorPage({
   user,
   appointments,
-  metrics,
+  metrics: initialMetrics,
 }: DoctorPageProps) {
+  const [metrics, setMetrics] = useState(initialMetrics);
+
+
+  function handleAppointmentStatusChange(
+    appointmentId: number,
+    nextStatus: "accepted" | "rejected",
+  ) {
+    const appointment = appointments.find(
+      (item) => item.id === appointmentId,
+    );
+
+    if (!appointment) return;
+
+    setMetrics((current) => ({
+      ...current,
+      pending: Math.max(0, current.pending - 1),
+      upcoming:
+        nextStatus === "accepted" &&
+          new Date(appointment.starts_at).getTime() > Date.now()
+          ? current.upcoming + 1
+          : current.upcoming,
+    }));
+  }
+
   return (
     <div className="px-12 py-9">
       <h1 className="text-2xl font-semibold">
@@ -38,25 +67,14 @@ export default function DoctorPage({
       <section className="mt-8">
         <h2 className="text-xl font-semibold">Appointments</h2>
 
-        {appointments.length === 0 ? (
-          <p className="mt-4 text-gray-500">No appointments yet.</p>
-        ) : (
-          <ul className="mt-4 space-y-3">
-            {appointments.map((appointment) => (
-              <li key={appointment.id} className="rounded-lg border p-4">
-                <p className="font-medium">Appointment #{appointment.id}</p>
-                <p className="mt-1 text-sm text-gray-500">
-                  {new Date(appointment.starts_at).toLocaleString("en-GB", {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                    timeZone: "Asia/Tbilisi",
-                  })}
-                </p>
-                <p className="mt-1 text-sm">Status: {appointment.status}</p>
-              </li>
-            ))}
-          </ul>
-        )}
+        <DoctorAppointments
+          appointments={appointments}
+          onStatusChange={handleAppointmentStatusChange}
+        />
+      </section>
+      <section className="rounded-xl border p-6">
+        <h2 className="mb-4 text-lg font-medium">Working Schedule</h2>
+        <DoctorScheduleForm />
       </section>
     </div>
   );
