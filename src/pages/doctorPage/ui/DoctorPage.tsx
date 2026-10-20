@@ -4,8 +4,8 @@ import { useState } from "react";
 import type { Appointment, AppointmentMetrics } from "@/entities/appointment";
 import type { User } from "@/entities/user/user.types";
 import DoctorAppointments from "./DoctorAppointments";
-import DoctorScheduleForm from "@/features/doctorSettings/ui/DoctorScheduleForm";
 import DoctorMetrics from "@/widgets/doctorMetrics";
+import DoctorSchedule from "@/widgets/doctorSchedule";
 
 interface DoctorPageProps {
   user: User;
@@ -57,10 +57,7 @@ export default function DoctorPage({
           onStatusChange={handleAppointmentStatusChange}
         />
       </section>
-      <section className="rounded-xl border p-6">
-        <h2 className="mb-4 text-lg font-medium">Working Schedule</h2>
-        <DoctorScheduleForm />
-      </section>
+      <DoctorSchedule/>
     </div>
   );
 }
