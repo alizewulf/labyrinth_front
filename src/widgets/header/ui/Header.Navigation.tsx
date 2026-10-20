@@ -9,7 +9,7 @@ export default function HeaderNavigation() {
   const routeClass: string =
     "text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer";
   const activeRouteClass: string = "font-bold! text-[#2563EB]!";
-  const { isAuthenticated,user } = useAppSelector((state) => state.auth);
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
   let routes
   if (!isAuthenticated) {
     routes = PUBLIC_ROUTES
@@ -17,6 +17,8 @@ export default function HeaderNavigation() {
     routes = DOCTOR_ROUTES
   } else if (user?.role === "admin") {
     routes = ADMIN_ROUTES
+  } else if (user?.role === "user") {
+    routes = PATIENT_ROUTES
   } else {
     throw new Error("ROUTER ERROR")
   }
