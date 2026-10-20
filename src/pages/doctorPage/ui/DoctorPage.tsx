@@ -3,9 +3,10 @@
 import { useState } from "react";
 import type { Appointment, AppointmentMetrics } from "@/entities/appointment";
 import type { User } from "@/entities/user/user.types";
-import DoctorAppointments from "./DoctorAppointments";
+import DoctorAppointments from "../../../widgets/doctorAppointments/ui/DoctorAppointments";
 import DoctorMetrics from "@/widgets/doctorMetrics";
 import DoctorSchedule from "@/widgets/doctorSchedule";
+import DoctorAppointmentsSection from "@/widgets/doctorAppointments/ui/DoctorAppointmentsSection";
 
 interface DoctorPageProps {
   user: User;
@@ -49,14 +50,7 @@ export default function DoctorPage({
       </h1>
   
       <DoctorMetrics metrics={metrics}/>
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Appointments</h2>
-
-        <DoctorAppointments
-          appointments={appointments}
-          onStatusChange={handleAppointmentStatusChange}
-        />
-      </section>
+      <DoctorAppointmentsSection appointments={appointments} onStatusChange={handleAppointmentStatusChange}/>
       <DoctorSchedule/>
     </div>
   );
