@@ -1,24 +1,28 @@
 "use client";
-import Button from "@/shared/ui/Button";
+import Link from "next/link";
 import FormIntroduction from "@/shared/ui/FormIntroduction/FormIntroduction";
 import { useAppSelector } from "@/store/hooks";
 
 export default function PatientIntroduction() {
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
   if (!isAuthenticated) {
-    console.log("ERROR: not authorized");
     return null;
   }
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <FormIntroduction
         message={{
           header: `Good Morning, ${user?.name}`,
           subtitle: "Here's your care at a glance. We're glad you're here.",
         }}
       />
-      <Button variant="primary">+ Book appointment</Button>
+      <Link
+        href="/book-appointment"
+        className="w-full sm:w-auto text-center rounded-lg bg-primary hover:bg-[#1d4ed8] px-5 py-2.5 text-sm font-semibold text-white transition-colors shadow-xs"
+      >
+        + Book appointment
+      </Link>
     </div>
   );
 }

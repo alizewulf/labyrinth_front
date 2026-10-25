@@ -21,8 +21,7 @@ export default function PatientPage({
       (a, b) =>
         new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime(),
     )[0];
-  console.log(appointments.map(({ id, status }) => ({ id, status })));
-  console.log("Pending metric:", metrics.pending);
+
   const nextVisit = nextAppointment
     ? new Date(nextAppointment.starts_at).toLocaleDateString("en-GB", {
         day: "numeric",
@@ -32,10 +31,10 @@ export default function PatientPage({
     : "No upcoming visits";
 
   return (
-    <div className="px-12 py-9">
+    <div className="px-4 py-6 sm:px-8 md:px-12 md:py-9">
       <PatientIntroduction />
 
-      <div className="flex justify-between">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6">
         <PatientMetric
           appointment={{
             nextVisit,

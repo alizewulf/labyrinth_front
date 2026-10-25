@@ -19,7 +19,6 @@ export default function DoctorPage({
 }: DoctorPageProps) {
   const [metrics, setMetrics] = useState(initialMetrics);
 
-
   function handleAppointmentStatusChange(
     appointmentId: number,
     nextStatus: "accepted" | "rejected",
@@ -42,38 +41,44 @@ export default function DoctorPage({
   }
 
   return (
-    <div className="px-12 py-9">
-      <h1 className="text-2xl font-semibold">
-        Welcome, Dr. {user.name} {user.surname}
-      </h1>
+    <div className="px-4 py-6 sm:px-8 md:px-12 md:py-9 max-w-7xl mx-auto w-full space-y-8">
+      <div>
+        <h1 className="text-xl sm:text-2xl font-bold font-jakarta text-text-primary">
+          Welcome, Dr. {user.name} {user.surname}
+        </h1>
+        <p className="text-xs sm:text-sm text-text-secondary mt-1">
+          Here is your practice overview and patient appointments.
+        </p>
+      </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-lg border p-5">
-          <p className="text-sm text-gray-500">Upcoming appointments</p>
-          <p className="mt-2 text-2xl font-semibold">{metrics.upcoming}</p>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 shadow-xs">
+          <p className="text-xs sm:text-sm text-gray-500">Upcoming appointments</p>
+          <p className="mt-2 text-2xl sm:text-3xl font-semibold text-text-primary">{metrics.upcoming}</p>
         </div>
 
-        <div className="rounded-lg border p-5">
-          <p className="text-sm text-gray-500">Pending requests</p>
-          <p className="mt-2 text-2xl font-semibold">{metrics.pending}</p>
+        <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 shadow-xs">
+          <p className="text-xs sm:text-sm text-gray-500">Pending requests</p>
+          <p className="mt-2 text-2xl sm:text-3xl font-semibold text-text-primary">{metrics.pending}</p>
         </div>
 
-        <div className="rounded-lg border p-5">
-          <p className="text-sm text-gray-500">Completed appointments</p>
-          <p className="mt-2 text-2xl font-semibold">{metrics.completed}</p>
+        <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 shadow-xs">
+          <p className="text-xs sm:text-sm text-gray-500">Completed appointments</p>
+          <p className="mt-2 text-2xl sm:text-3xl font-semibold text-text-primary">{metrics.completed}</p>
         </div>
       </div>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Appointments</h2>
+      <section className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6 shadow-xs">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">Appointments</h2>
 
         <DoctorAppointments
           appointments={appointments}
           onStatusChange={handleAppointmentStatusChange}
         />
       </section>
-      <section className="rounded-xl border p-6">
-        <h2 className="mb-4 text-lg font-medium">Working Schedule</h2>
+
+      <section className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6 shadow-xs">
+        <h2 className="mb-4 text-lg sm:text-xl font-semibold">Working Schedule</h2>
         <DoctorScheduleForm />
       </section>
     </div>
