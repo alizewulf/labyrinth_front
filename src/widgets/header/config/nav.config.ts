@@ -1,4 +1,4 @@
-interface NavigationConfig {
+export interface NavigationConfig {
   route: string;
   label: string;
 }

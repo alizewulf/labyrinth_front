@@ -3,7 +3,6 @@
 import { useState } from "react";
 import type { Appointment, AppointmentMetrics } from "@/entities/appointment";
 import type { User } from "@/entities/user/user.types";
-import DoctorAppointments from "../../../widgets/doctorAppointments/ui/DoctorAppointments";
 import DoctorMetrics from "@/widgets/doctorMetrics";
 import DoctorSchedule from "@/widgets/doctorSchedule";
 import DoctorAppointmentsSection from "@/widgets/doctorAppointments/ui/DoctorAppointmentsSection";
@@ -20,7 +19,6 @@ export default function DoctorPage({
   metrics: initialMetrics,
 }: DoctorPageProps) {
   const [metrics, setMetrics] = useState(initialMetrics);
-
 
   function handleAppointmentStatusChange(
     appointmentId: number,

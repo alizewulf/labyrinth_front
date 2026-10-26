@@ -15,7 +15,7 @@ export default async function SpecialtiesPage() {
   );
 
   return (
-    <div className="flex flex-col px-16 py-12 gap-7">
+    <div className="flex flex-col px-4 py-6 sm:px-8 md:px-16 md:py-12 gap-7 max-w-7xl mx-auto w-full">
       <FormIntroduction
         message={{
           header: "Explore our specialties",
@@ -48,11 +48,6 @@ export default async function SpecialtiesPage() {
             "Find a trusted doctor and book a visit that fits your life",
         }}
       />
-
-      <caption className="text-xs text-text-secondary">
-        Labyrinth is not an emergency service. If you are experiencing a medical
-        emergency, call 112.
-      </caption>
     </div>
   );
 }
