@@ -28,64 +28,64 @@ export default function AdminDoctors() {
     loader();
   }, []);
   if (isLoading) {
-    return <p className="p-8">Loading doctors...</p>;
+    return <p className="p-4 sm:p-8">Loading doctors...</p>;
   }
 
   if (error) {
-    return <p className="p-8 text-red-600">{error}</p>;
+    return <p className="p-4 sm:p-8 text-red-600">{error}</p>;
   }
 
   return (
-    <section className="flex flex-col gap-6 p-8">
+    <section className="flex flex-col gap-6 p-4 sm:p-6 md:p-8 max-w-7xl mx-auto w-full">
       <header>
-        <h1 className="text-2xl font-semibold">Doctor accounts</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-xl sm:text-2xl font-semibold">Doctor accounts</h1>
+        <p className="mt-1 text-xs sm:text-sm text-gray-500">
           Manage doctor accounts and profile completion.
         </p>
       </header>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-5">
-        <p className="text-sm text-gray-500">Total doctor accounts</p>
-        <p className="mt-2 text-3xl font-semibold">{doctors.length}</p>
+      <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 shadow-xs">
+        <p className="text-xs sm:text-sm text-gray-500">Total doctor accounts</p>
+        <p className="mt-2 text-2xl sm:text-3xl font-semibold">{doctors.length}</p>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-200">
-        <table className="w-full text-left text-sm">
+      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-xs">
+        <table className="w-full text-left text-xs sm:text-sm whitespace-nowrap">
           <thead className="bg-gray-50 text-gray-600">
             <tr>
-              <th className="px-5 py-3 font-medium">Doctor</th>
-              <th className="px-5 py-3 font-medium">Email</th>
-              <th className="px-5 py-3 font-medium">Specialization</th>
-              <th className="px-5 py-3 font-medium">Experience</th>
-              <th className="px-5 py-3 font-medium">Profile</th>
+              <th className="px-4 sm:px-5 py-3 font-medium">Doctor</th>
+              <th className="px-4 sm:px-5 py-3 font-medium">Email</th>
+              <th className="px-4 sm:px-5 py-3 font-medium">Specialization</th>
+              <th className="px-4 sm:px-5 py-3 font-medium">Experience</th>
+              <th className="px-4 sm:px-5 py-3 font-medium">Profile</th>
             </tr>
           </thead>
 
           <tbody className="divide-y divide-gray-100">
             {doctors.map((doctor) => (
-              <tr key={doctor.doctor_id}>
-                <td className="px-5 py-4 font-medium text-gray-900">
+              <tr key={doctor.doctor_id} className="hover:bg-gray-50/50">
+                <td className="px-4 sm:px-5 py-3.5 font-medium text-gray-900">
                   {[doctor.name, doctor.surname].filter(Boolean).join(" ") ||
                     "Not provided"}
                 </td>
-                <td className="px-5 py-4">{doctor.email}</td>
-                <td className="px-5 py-4">
+                <td className="px-4 sm:px-5 py-3.5 text-gray-600">{doctor.email}</td>
+                <td className="px-4 sm:px-5 py-3.5 text-gray-600">
                   {doctor.specialization ?? "Not provided"}
                 </td>
-                <td className="px-5 py-4">
+                <td className="px-4 sm:px-5 py-3.5 text-gray-600">
                   {doctor.experience !== null && doctor.experience_type !== null
                     ? `${doctor.experience} ${
                         doctor.experience_type === "year" ? "years" : "months"
                       }`
                     : "Not provided"}
                 </td>
-                <td className="px-5 py-4">
+                <td className="px-4 sm:px-5 py-3.5">
                   <span
-                    className={
+                    className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${
                       doctor.profile_completed
-                        ? "rounded-full bg-green-100 px-3 py-1 text-green-700"
-                        : "rounded-full bg-amber-100 px-3 py-1 text-amber-700"
-                    }
+                        ? "bg-green-100 text-green-700"
+                        : "bg-amber-100 text-amber-700"
+                    }`}
                   >
                     {doctor.profile_completed ? "Complete" : "Incomplete"}
                   </span>
@@ -103,7 +103,8 @@ export default function AdminDoctors() {
           </tbody>
         </table>
       </div>
-      <CreateDoctorForm onCreated={loadDoctors} />
+
+      <CreateDoctorForm onDoctorCreated={loadDoctors} />
     </section>
   );
 }

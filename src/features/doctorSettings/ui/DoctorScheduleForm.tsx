@@ -7,7 +7,6 @@ import {
 } from "@/entities/doctorSchedule";
 import type {
   DoctorSchedule,
-  DoctorScheduleEntry,
 } from "@/entities/doctorSchedule";
 
 const DAYS = [
@@ -21,7 +20,7 @@ const DAYS = [
 ];
 
 const inputClass =
-  "rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-600";
+  "w-full sm:w-auto rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-600 text-sm";
 
 type ScheduleInterval = {
   dayOfWeek: number;
@@ -108,7 +107,7 @@ export default function DoctorScheduleForm() {
       ...current,
       {
         dayOfWeek,
-        startTime: "13:00",
+        startTime: "09:00",
         endTime: "17:00",
       },
     ]);
@@ -128,66 +127,33 @@ export default function DoctorScheduleForm() {
     setError("");
     setSuccess("");
 
-    if (schedule.length === 0) {
-      setError("Select at least one working day.");
-      return;
-    }
-
-    const sortedSchedule = [...schedule].sort(
-      (a, b) =>
-        a.dayOfWeek - b.dayOfWeek ||
-        a.startTime.localeCompare(b.startTime),
-    );
-
-    for (let index = 0; index < sortedSchedule.length; index++) {
-      const current = sortedSchedule[index];
-
-      if (current.endTime <= current.startTime) {
-        setError("End time must be later than start time.");
-        return;
-      }
-
-      const previous = sortedSchedule[index - 1];
-
-      if (
-        previous &&
-        previous.dayOfWeek === current.dayOfWeek &&
-        previous.endTime > current.startTime
-      ) {
-        setError("Working intervals cannot overlap.");
+    // Validate start and end times
+    for (const item of schedule) {
+      if (item.startTime >= item.endTime) {
+        setError("Start time must be earlier than end time.");
         return;
       }
     }
 
     setIsSaving(true);
-
     try {
-      const payload: DoctorScheduleEntry[] = sortedSchedule.map(
-        ({ dayOfWeek, startTime, endTime }) => ({
-          dayOfWeek,
-          startTime,
-          endTime,
-        }),
-      );
-
-      const updatedSchedule = await updateMySchedule({
-        schedule: payload,
+      await updateMySchedule({
+        schedule: schedule.map((item) => ({
+          dayOfWeek: item.dayOfWeek,
+          startTime: item.startTime,
+          endTime: item.endTime,
+        })),
       });
-
-      setSchedule(mapSchedule(updatedSchedule));
-      setSuccess("Working schedule updated successfully.");
-    } catch (error) {
-      console.error("Failed to update doctor schedule:", error);
-      setError(
-        "Failed to save schedule. Existing appointments may conflict with these hours.",
-      );
+      setSuccess("Working schedule saved successfully.");
+    } catch {
+      setError("Failed to save working schedule. Please try again.");
     } finally {
       setIsSaving(false);
     }
   }
 
   if (isLoading) {
-    return <p>Loading working schedule...</p>;
+    return <p className="text-sm text-gray-500">Loading working schedule...</p>;
   }
 
   return (
@@ -207,29 +173,29 @@ export default function DoctorScheduleForm() {
           return (
             <section
               key={day.value}
-              className="rounded-lg border border-gray-200 p-4"
+              className="rounded-lg border border-gray-200 p-3 sm:p-4 bg-gray-50/50"
             >
-              <label className="flex items-center gap-3 font-medium">
+              <label className="flex items-center gap-3 font-medium text-text-primary cursor-pointer">
                 <input
                   type="checkbox"
                   checked={isWorking}
                   onChange={(event) =>
                     toggleDay(day.value, event.target.checked)
                   }
-                  className="h-4 w-4 accent-blue-600"
+                  className="h-4 w-4 rounded border-gray-300 accent-blue-600 focus:ring-blue-500"
                 />
-                {day.label}
+                <span className="text-sm sm:text-base">{day.label}</span>
               </label>
 
               {isWorking && (
-                <div className="mt-4 space-y-3">
+                <div className="mt-4 space-y-3 pl-0 sm:pl-7">
                   {intervals.map((interval) => (
                     <div
                       key={`${day.value}-${interval.index}`}
-                      className="flex flex-wrap items-end gap-3"
+                      className="flex flex-col sm:flex-row sm:items-end gap-3 bg-white p-3 rounded-lg border border-gray-100"
                     >
-                      <div className="flex flex-col gap-1">
-                        <label className="text-sm text-gray-600">
+                      <div className="flex flex-col gap-1 w-full sm:w-auto">
+                        <label className="text-xs sm:text-sm text-gray-600">
                           Start time
                         </label>
                         <input
@@ -247,8 +213,8 @@ export default function DoctorScheduleForm() {
                         />
                       </div>
 
-                      <div className="flex flex-col gap-1">
-                        <label className="text-sm text-gray-600">
+                      <div className="flex flex-col gap-1 w-full sm:w-auto">
+                        <label className="text-xs sm:text-sm text-gray-600">
                           End time
                         </label>
                         <input
@@ -266,20 +232,22 @@ export default function DoctorScheduleForm() {
                         />
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => removeInterval(interval.index)}
-                        className="rounded-lg border border-red-200 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
-                      >
-                        Remove
-                      </button>
+                      <div className="sm:ml-auto w-full sm:w-auto flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() => removeInterval(interval.index)}
+                          className="w-full sm:w-auto rounded-lg border border-red-200 px-3 py-2 text-xs sm:text-sm text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   ))}
 
                   <button
                     type="button"
                     onClick={() => addInterval(day.value)}
-                    className="text-sm font-medium text-blue-600 hover:underline"
+                    className="inline-block text-xs sm:text-sm font-medium text-blue-600 hover:underline pt-1"
                   >
                     + Add interval
                   </button>
@@ -291,24 +259,26 @@ export default function DoctorScheduleForm() {
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-600">
+        <p role="alert" className="text-sm text-red-600 p-3 bg-red-50 rounded-lg border border-red-100">
           {error}
         </p>
       )}
 
       {success && (
-        <p role="status" className="text-sm text-green-700">
+        <p role="status" className="text-sm text-green-700 p-3 bg-green-50 rounded-lg border border-green-100">
           {success}
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={isSaving}
-        className="rounded-lg bg-blue-600 px-5 py-2 font-medium text-white disabled:opacity-50"
-      >
-        {isSaving ? "Saving..." : "Save Schedule"}
-      </button>
+      <div>
+        <button
+          type="submit"
+          disabled={isSaving}
+          className="w-full sm:w-auto rounded-lg bg-blue-600 px-6 py-2.5 font-medium text-white hover:bg-blue-700 transition-colors disabled:opacity-50"
+        >
+          {isSaving ? "Saving..." : "Save Schedule"}
+        </button>
+      </div>
     </form>
   );
 }
