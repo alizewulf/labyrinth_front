@@ -1,5 +1,5 @@
-import DoctorSettingsPage from "@/pages/doctorSettingsPage";
+import DoctorSettings from "@/widgets/doctorSettings";
 
-export default function DoctorSettings() {
-  return <DoctorSettingsPage />;
+export default function DoctorSettingsPage() {
+  return <DoctorSettings />;
 }

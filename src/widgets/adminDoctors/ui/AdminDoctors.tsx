@@ -4,6 +4,7 @@ import { getAdminDoctors } from "@/entities/doctor/api/getAdminDoctors";
 import { AdminDoctor } from "@/entities/doctor/model/doctor.types";
 import CreateDoctorForm from "@/features/createDoctor";
 import { useEffect, useState } from "react";
+import DoctorsCount from "./DoctorCount";
 
 export default function AdminDoctors() {
   const [doctors, setDoctors] = useState<AdminDoctor[]>([]);
@@ -44,13 +45,9 @@ export default function AdminDoctors() {
         </p>
       </header>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 shadow-xs">
-        <p className="text-xs sm:text-sm text-gray-500">Total doctor accounts</p>
-        <p className="mt-2 text-2xl sm:text-3xl font-semibold">{doctors.length}</p>
-      </div>
-
-      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-xs">
-        <table className="w-full text-left text-xs sm:text-sm whitespace-nowrap">
+      <DoctorsCount count={doctors.length}/>
+      <div className="overflow-x-auto rounded-xl border border-gray-200">
+        <table className="w-full text-left text-sm">
           <thead className="bg-gray-50 text-gray-600">
             <tr>
               <th className="px-4 sm:px-5 py-3 font-medium">Doctor</th>

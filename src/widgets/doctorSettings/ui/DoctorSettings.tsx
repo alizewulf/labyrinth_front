@@ -6,7 +6,7 @@ import ChangePasswordForm from "@/features/doctorSettings/ui/ChangePasswordForm"
 import DoctorAvatarForm from "@/features/doctorSettings/ui/DoctorAvatarForm";
 import DoctorScheduleForm from "@/features/doctorSettings/ui/DoctorScheduleForm";
 
-export default function DoctorSettingsPage() {
+export default function DoctorSettings() {
   const {
     profile,
     specialities,

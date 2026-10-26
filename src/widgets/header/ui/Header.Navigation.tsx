@@ -11,20 +11,18 @@ export default function HeaderNavigation() {
     "text-sm font-jakarta leading-[150%] text-text-secondary select-none cursor-pointer hover:text-text-primary transition-colors";
   const activeRouteClass: string = "font-bold! text-[#2563EB]!";
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
-
-  const getRoutes = () => {
-    if (!isAuthenticated) return PUBLIC_ROUTES;
-    if (user?.role === "doctor") return DOCTOR_ROUTES;
-    if (user?.role === "admin") return ADMIN_ROUTES;
-    return PATIENT_ROUTES;
-  };
-
-  const routes = getRoutes();
-
-  if (pathName === "/login" || pathName === "/register") {
-    return null;
+  let routes
+  if (!isAuthenticated) {
+    routes = PUBLIC_ROUTES
+  } else if (user?.role === "doctor") {
+    routes = DOCTOR_ROUTES
+  } else if (user?.role === "admin") {
+    routes = ADMIN_ROUTES
+  } else if (user?.role === "user") {
+    routes = PATIENT_ROUTES
+  } else {
+    throw new Error("ROUTER ERROR")
   }
-
   return (
     <nav className="hidden md:flex gap-6 lg:gap-8 items-center">
       {routes.map((route) => (

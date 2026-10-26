@@ -24,10 +24,10 @@ export const PATIENT_ROUTES: NavigationConfig[] = [
 ];
 
 export const DOCTOR_ROUTES: NavigationConfig[] = [
-  { route: "/doctor", label: "Dashboard" },
+  { route: "/", label: "Dashboard" },
   { route: "/doctor/settings", label: "Settings" },
 ];
 
 export const ADMIN_ROUTES: NavigationConfig[] = [
-  { route: "/admin/doctors", label: "Doctors" },
+  { route: "/", label: "Dashboard" },
 ];
