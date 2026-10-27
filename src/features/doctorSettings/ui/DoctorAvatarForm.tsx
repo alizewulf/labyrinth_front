@@ -71,7 +71,7 @@ export default function DoctorAvatarForm({
     setSuccess(null);
 
     try {
-      const response = await API.post("/doctors/me/avatar", formData);
+      const response = await API.patch("/doctors/me/avatar", formData);
 
       onUploaded(response.data.avatar_url ?? null);
       setFile(null);
