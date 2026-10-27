@@ -1,4 +1,4 @@
-import { getDoctors } from "@/entities/doctor/api/getDoctors";
+import type { Doctor } from "@/entities/doctor/model/doctor.types";
 import DoctorCard from "./Doctor.Card";
 
 async function FeaturedDoctors() {
@@ -22,12 +22,22 @@ async function FeaturedDoctors() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {doctors.map((doctor) => (
-          <DoctorCard doctor={doctor} key={doctor.id} />
-        ))}
+        {doctors
+          .slice(0, 4)
+          .map((doctor: Doctor) => (
+            <DoctorCard doctor={doctor} key={doctor.id} />
+          ))}
       </div>
     </section>
   );
+}
+
+async function getDoctors() {
+  const response = await fetch("/api/doctors");
+  if (!response.ok) {
+    throw new Error("Failed to fetch doctors");
+  }
+  return response.json();
 }
 
 export default FeaturedDoctors;
